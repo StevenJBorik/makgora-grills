@@ -1,0 +1,48 @@
+{
+    "troll_palettes": {
+        "jungle_amber": {
+            "name": "Jungle Amber",
+            "theme": "Troll / Zandalari",
+            "base": "#5A7F3C",
+            "accent": "#E0A83B",
+            "shadow": "#2E4020"
+        },
+        "loa_bone_turquoise": {
+            "name": "Loa Bone Turquoise",
+            "theme": "Troll / Zandalari",
+            "base": "#2FB7A3",
+            "bone": "#E9E2D0",
+            "shadow": "#1A4F4A"
+        }
+    },
+    "undead_palettes": {
+        "grave_silver": {
+            "name": "Grave Silver",
+            "theme": "Undead / Forsaken",
+            "base": "#6B7076",
+            "shadow": "#2B2E33",
+            "highlight": "#9FA6AD"
+        },
+        "plague_emerald": {
+            "name": "Plague Emerald",
+            "theme": "Undead / Forsaken",
+            "base": "#1B5E20",
+            "glow": "#8BC34A"
+        }
+    },
+    "demon_palettes": {
+        "fel_jade": {
+            "name": "Fel Jade",
+            "theme": "Demon / Fel",
+            "base": "#1C3F1C",
+            "glow": "#39FF14",
+            "shadow": "#0A140A"
+        },
+        "infernal_obsidian": {
+            "name": "Infernal Obsidian",
+            "theme": "Demon / Fel",
+            "base": "#0E0E10",
+            "vein": "#FF3B1F"
+        }
+    }
+}

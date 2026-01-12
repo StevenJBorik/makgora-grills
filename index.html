@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M@k'g0ra | Luxury Fantasy Grillz</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@200;300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A962;
+            --gold-dark: #8B7355;
+            --gold-darker: #6B5642;
+            --text-light: #0a0a0a;
+            --text-dark: #FAFAFA;
+            --carbon: rgba(20, 20, 20, 0.88);
+            --carbon-light: rgba(255, 255, 255, 0.88);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            transition: all 0.5s ease;
+        }
+
+        /* DARK MODE (default) */
+        body {
+            background: #0a0a0a url('assets/black.jpeg') center/cover fixed;
+            color: var(--text-dark);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* LIGHT MODE */
+        body.light-mode {
+            background: #fafafa url('assets/white.jpeg') center/cover fixed;
+            color: var(--text-light);
+        }
+
+        body.light-mode::before {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+        }
+
+        body.light-mode nav {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, transparent 100%);
+        }
+
+        .nav-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        body.light-mode .nav-brand {
+            color: var(--gold-darker);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            padding: 0.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        body.light-mode .theme-toggle {
+            border-color: var(--gold-darker);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(107, 86, 66, 0.1);
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        body.light-mode .icon {
+            stroke: var(--gold-darker);
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 12vw, 9rem);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            text-shadow: 0 0 80px rgba(201, 169, 98, 0.3);
+        }
+
+        body.light-mode .brand {
+            color: var(--gold-dark);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* SECTION */
+        section {
+            padding: 8rem 4rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        body.light-mode .section-title {
+            color: var(--gold-dark);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* COLLECTION GRID */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* CARBON CARD */
+        .card {
+            position: relative;
+            border-radius: 2px;
+            overflow: hidden;
+            background: var(--carbon);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(201, 169, 98, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.light-mode .card {
+            background: var(--carbon-light);
+            border-color: rgba(201, 169, 98, 0.15);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(201, 169, 98, 0.02) 1px,
+                    rgba(201, 169, 98, 0.02) 2px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card:hover {
+            border-color: rgba(201, 169, 98, 0.3);
+            transform: translateY(-8px);
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(201, 169, 98, 0.1);
+        }
+
+        body.light-mode .card:hover {
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.15),
+                0 0 40px rgba(201, 169, 98, 0.15);
+        }
+
+        .card-image {
+            position: relative;
+            height: 360px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.06);
+        }
+
+        .card-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+
+        body.light-mode .card-title {
+            color: var(--text-light);
+        }
+
+        .card-material {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.8;
+        }
+
+        body.light-mode .card-material {
+            color: var(--gold-dark);
+            opacity: 1;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        body.light-mode .footer-brand {
+            color: var(--gold-dark);
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        body.light-mode .lightbox {
+            background: rgba(255, 255, 255, 0.97);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 2px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 1.5rem;
+            color: var(--gold);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand {
+                font-size: 3rem;
+                letter-spacing: 0.15em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-brand">M@k'g0ra</div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <svg class="icon icon-dark" viewBox="0 0 24 24">
+                <path
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <svg class="icon icon-light" style="display: none;" viewBox="0 0 24 24">
+                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1 class="brand">M@k'g0ra</h1>
+    </section>
+
+    <!-- JADE COLLECTION -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Jade</h2>
+        </div>
+
+        <div class="collection-grid">
+            <div class="card" onclick="openLightbox('renders/tusk_base_imperial_jade_1768188155840.png')">
+                <div class="card-image">
+                    <img src="renders/tusk_base_imperial_jade_1768188155840.png" alt="Imperial War Jade">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Imperial War Jade</h3>
+                    <p class="card-material">Titanium + 14K Gold</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/tusk_base_blood_jade_1768188169925.png')">
+                <div class="card-image">
+                    <img src="renders/tusk_base_blood_jade_1768188169925.png" alt="Blood Jade">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Blood Jade</h3>
+                    <p class="card-material">Titanium Grade 5</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/illusion_fang_void_jade_1768188184095.png')">
+                <div class="card-image">
+                    <img src="renders/illusion_fang_void_jade_1768188184095.png" alt="Void Jade">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Void Jade</h3>
+                    <p class="card-material">Resin + Phosphor</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/illusion_fang_fel_jade_1768188198950.png')">
+                <div class="card-image">
+                    <img src="renders/illusion_fang_fel_jade_1768188198950.png" alt="Fel Jade">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Fel Jade</h3>
+                    <p class="card-material">Titanium + Glow Inlay</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/ritual_inset_white_jade_1768188266264.png')">
+                <div class="card-image">
+                    <img src="renders/ritual_inset_white_jade_1768188266264.png" alt="White Jade Bone">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">White Jade Bone</h3>
+                    <p class="card-material">Zirconia</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/tusk_base_jungle_amber_1768188304837.png')">
+                <div class="card-image">
+                    <img src="renders/tusk_base_jungle_amber_1768188304837.png" alt="Jungle Amber">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Jungle Amber</h3>
+                    <p class="card-material">Titanium + 14K Gold</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EARTH COLLECTION -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Earth</h2>
+        </div>
+
+        <div class="collection-grid">
+            <div class="card" onclick="openLightbox('renders/tusk_base_burnt_sienna_1768189156573.png')">
+                <div class="card-image">
+                    <img src="renders/tusk_base_burnt_sienna_1768189156573.png" alt="Burnt Sienna">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Burnt Sienna</h3>
+                    <p class="card-material">Titanium Grade 5</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/tusk_base_ancient_bronze_1768189199088.png')">
+                <div class="card-image">
+                    <img src="renders/tusk_base_ancient_bronze_1768189199088.png" alt="Ancient Bronze">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Ancient Bronze</h3>
+                    <p class="card-material">Bronze + Copper</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/tusk_base_cedar_smoke_1768189269000.png')">
+                <div class="card-image">
+                    <img src="renders/tusk_base_cedar_smoke_1768189269000.png" alt="Cedar Smoke">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Cedar Smoke</h3>
+                    <p class="card-material">Dental Resin</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/ritual_inset_canyon_rust_1768189223629.png')">
+                <div class="card-image">
+                    <img src="renders/ritual_inset_canyon_rust_1768189223629.png" alt="Canyon Rust">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Canyon Rust</h3>
+                    <p class="card-material">Titanium Grade 5</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/asymmetric_terracotta_dusk_1768189295083.png')">
+                <div class="card-image">
+                    <img src="renders/asymmetric_terracotta_dusk_1768189295083.png" alt="Terracotta Dusk">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Terracotta Dusk</h3>
+                    <p class="card-material">Titanium Grade 5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OCEAN COLLECTION -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Ocean</h2>
+        </div>
+
+        <div class="collection-grid">
+            <div class="card" onclick="openLightbox('renders/jaw_crown_deep_cobalt_1768189170372.png')">
+                <div class="card-image">
+                    <img src="renders/jaw_crown_deep_cobalt_1768189170372.png" alt="Deep Cobalt">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Deep Cobalt</h3>
+                    <p class="card-material">Titanium Grade 5</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/illusion_fang_storm_tide_1768189184567.png')">
+                <div class="card-image">
+                    <img src="renders/illusion_fang_storm_tide_1768189184567.png" alt="Storm Tide">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Storm Tide</h3>
+                    <p class="card-material">Titanium + LED Fiber</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/illusion_fang_midnight_sapphire_1768189255211.png')">
+                <div class="card-image">
+                    <img src="renders/illusion_fang_midnight_sapphire_1768189255211.png" alt="Midnight Sapphire">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Midnight Sapphire</h3>
+                    <p class="card-material">Titanium + Sapphire</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/ritual_inset_loa_turquoise_1768188290443.png')">
+                <div class="card-image">
+                    <img src="renders/ritual_inset_loa_turquoise_1768188290443.png" alt="Loa Turquoise">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Loa Turquoise</h3>
+                    <p class="card-material">Titanium + Bone</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORGE COLLECTION -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Forge</h2>
+        </div>
+
+        <div class="collection-grid">
+            <div class="card" onclick="openLightbox('renders/jaw_crown_hammered_copper_1768189241107.png')">
+                <div class="card-image">
+                    <img src="renders/jaw_crown_hammered_copper_1768189241107.png" alt="Hammered Copper">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Hammered Copper</h3>
+                    <p class="card-material">Pure Copper</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/jaw_crown_grave_silver_1768188221833.png')">
+                <div class="card-image">
+                    <img src="renders/jaw_crown_grave_silver_1768188221833.png" alt="Grave Silver">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Grave Silver</h3>
+                    <p class="card-material">Surgical Steel 316L</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/jaw_crown_infernal_obsidian_1768188235975.png')">
+                <div class="card-image">
+                    <img src="renders/jaw_crown_infernal_obsidian_1768188235975.png" alt="Infernal Obsidian">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Infernal Obsidian</h3>
+                    <p class="card-material">Resin + LED Fiber</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="openLightbox('renders/asymmetric_nephrite_storm_1768188250658.png')">
+                <div class="card-image">
+                    <img src="renders/asymmetric_nephrite_storm_1768188250658.png" alt="Nephrite Storm">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Nephrite Storm</h3>
+                    <p class="card-material">Titanium + Steel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">M@k'g0ra</div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">✕</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const iconDark = document.querySelector('.icon-dark');
+            const iconLight = document.querySelector('.icon-light');
+
+            if (document.body.classList.contains('light-mode')) {
+                iconDark.style.display = 'none';
+                iconLight.style.display = 'block';
+            } else {
+                iconDark.style.display = 'block';
+                iconLight.style.display = 'none';
+            }
+        }
+
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>

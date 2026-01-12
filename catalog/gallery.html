@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0rcGrillz™ Concept Gallery</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --bg-card: #111114;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888;
+            --accent-jade: #2FA36B;
+            --accent-gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(180deg, #0d1a14 0%, var(--bg-dark) 100%);
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--accent-jade), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: var(--accent-jade);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-jade);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: var(--accent-jade);
+            color: var(--bg-dark);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            padding: 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid rgba(47, 163, 107, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(47, 163, 107, 0.25);
+            border-color: var(--accent-jade);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            padding: 1.5rem;
+            background: linear-gradient(180deg, transparent 0%, var(--bg-card) 20%);
+            position: relative;
+        }
+
+        .gallery-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tag.archetype {
+            background: rgba(47, 163, 107, 0.2);
+            color: var(--accent-jade);
+        }
+
+        .tag.palette {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--accent-gold);
+        }
+
+        .gallery-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .color-chips {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .color-chip {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .color-chip:hover {
+            transform: scale(1.2);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 60px rgba(47, 163, 107, 0.3);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .gallery-item img {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Concept Gallery</h1>
+        <p>AI-generated concept art for each archetype × palette combination</p>
+        <a href="index.html" class="nav-link">← Back to Catalog</a>
+    </header>
+
+    <div class="gallery">
+        <!-- Tusk-Base × Imperial War Jade -->
+        <div class="gallery-item" onclick="openLightbox('../renders/tusk_base_imperial_jade_1768188155840.png')">
+            <img src="../renders/tusk_base_imperial_jade_1768188155840.png" alt="Tusk-Base Cap × Imperial War Jade">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Tusk-Base Cap</span>
+                    <span class="tag palette">Imperial War Jade</span>
+                </div>
+                <h3 class="gallery-title">Imperial War Jade</h3>
+                <p class="gallery-desc">Polished royal authority. Deep emerald jade with gold accents. The flagship
+                    design.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #0F5132;" title="#0F5132"></div>
+                    <div class="color-chip" style="background: #2FA36B;" title="#2FA36B"></div>
+                    <div class="color-chip" style="background: #B9E5C9;" title="#B9E5C9"></div>
+                    <div class="color-chip" style="background: #D4AF37;" title="#D4AF37"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tusk-Base × Blood Jade -->
+        <div class="gallery-item" onclick="openLightbox('../renders/tusk_base_blood_jade_1768188169925.png')">
+            <img src="../renders/tusk_base_blood_jade_1768188169925.png" alt="Tusk-Base Cap × Blood Jade">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Tusk-Base Cap</span>
+                    <span class="tag palette">Blood Jade</span>
+                </div>
+                <h3 class="gallery-title">Blood Jade</h3>
+                <p class="gallery-desc">Rage and sacrifice. Dark jade with blood red veins. Battle-worn finish.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #153D2E;" title="#153D2E"></div>
+                    <div class="color-chip" style="background: #7B1E1E;" title="#7B1E1E"></div>
+                    <div class="color-chip" style="background: #3F7A5A;" title="#3F7A5A"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tusk-Base × Jungle Amber -->
+        <div class="gallery-item" onclick="openLightbox('../renders/tusk_base_jungle_amber_1768188304837.png')">
+            <img src="../renders/tusk_base_jungle_amber_1768188304837.png" alt="Tusk-Base Cap × Jungle Amber">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Tusk-Base Cap</span>
+                    <span class="tag palette">Jungle Amber</span>
+                </div>
+                <h3 class="gallery-title">Jungle Amber</h3>
+                <p class="gallery-desc">Tribal troll aesthetic. Forest green with golden amber accents. Jungle canopy
+                    warmth.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #5A7F3C;" title="#5A7F3C"></div>
+                    <div class="color-chip" style="background: #E0A83B;" title="#E0A83B"></div>
+                    <div class="color-chip" style="background: #2E4020;" title="#2E4020"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Illusion Fang × Void Jade -->
+        <div class="gallery-item" onclick="openLightbox('../renders/illusion_fang_void_jade_1768188184095.png')">
+            <img src="../renders/illusion_fang_void_jade_1768188184095.png" alt="Illusion Fang × Void Jade">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Illusion Fang</span>
+                    <span class="tag palette">Void Jade</span>
+                </div>
+                <h3 class="gallery-title">Void Jade</h3>
+                <p class="gallery-desc">Corrupted magic. Near-black obsidian with UV-reactive neon green veins. Glows in
+                    the dark.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #050B09;" title="#050B09"></div>
+                    <div class="color-chip" style="background: #1FFF8B;" title="#1FFF8B"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Illusion Fang × Fel Jade -->
+        <div class="gallery-item" onclick="openLightbox('../renders/illusion_fang_fel_jade_1768188198950.png')">
+            <img src="../renders/illusion_fang_fel_jade_1768188198950.png" alt="Illusion Fang × Fel Jade">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Illusion Fang</span>
+                    <span class="tag palette">Fel Jade</span>
+                </div>
+                <h3 class="gallery-title">Fel Jade</h3>
+                <p class="gallery-desc">Demonic corruption. Dark fel green with radioactive glow through cracked
+                    fractures.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #1C3F1C;" title="#1C3F1C"></div>
+                    <div class="color-chip" style="background: #39FF14;" title="#39FF14"></div>
+                    <div class="color-chip" style="background: #0A140A;" title="#0A140A"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Illusion Fang × Plague Emerald -->
+        <div class="gallery-item" onclick="openLightbox('../renders/illusion_fang_plague_emerald_1768188320700.png')">
+            <img src="../renders/illusion_fang_plague_emerald_1768188320700.png" alt="Illusion Fang × Plague Emerald">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Illusion Fang</span>
+                    <span class="tag palette">Plague Emerald</span>
+                </div>
+                <h3 class="gallery-title">Plague Emerald</h3>
+                <p class="gallery-desc">Toxic undead. Deep emerald with sickly bright green glow veins. Diseased
+                    aesthetic.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #1B5E20;" title="#1B5E20"></div>
+                    <div class="color-chip" style="background: #8BC34A;" title="#8BC34A"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jaw Crown × Grave Silver -->
+        <div class="gallery-item" onclick="openLightbox('../renders/jaw_crown_grave_silver_1768188221833.png')">
+            <img src="../renders/jaw_crown_grave_silver_1768188221833.png" alt="Jaw Crown × Grave Silver">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Jaw Crown</span>
+                    <span class="tag palette">Grave Silver</span>
+                </div>
+                <h3 class="gallery-title">Grave Silver</h3>
+                <p class="gallery-desc">Death knight aesthetic. Cold steel gray with rune etchings. Armor-style
+                    segments.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #6B7076;" title="#6B7076"></div>
+                    <div class="color-chip" style="background: #2B2E33;" title="#2B2E33"></div>
+                    <div class="color-chip" style="background: #9FA6AD;" title="#9FA6AD"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jaw Crown × Infernal Obsidian -->
+        <div class="gallery-item" onclick="openLightbox('../renders/jaw_crown_infernal_obsidian_1768188235975.png')">
+            <img src="../renders/jaw_crown_infernal_obsidian_1768188235975.png" alt="Jaw Crown × Infernal Obsidian">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Jaw Crown</span>
+                    <span class="tag palette">Infernal Obsidian</span>
+                </div>
+                <h3 class="gallery-title">Infernal Obsidian</h3>
+                <p class="gallery-desc">Volcanic demon. Obsidian black with lava red veins through cracked surface.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #0E0E10;" title="#0E0E10"></div>
+                    <div class="color-chip" style="background: #FF3B1F;" title="#FF3B1F"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jaw Crown × Jungle Amber -->
+        <div class="gallery-item" onclick="openLightbox('../renders/jaw_crown_jungle_amber_1768188334656.png')">
+            <img src="../renders/jaw_crown_jungle_amber_1768188334656.png" alt="Jaw Crown × Jungle Amber">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Jaw Crown</span>
+                    <span class="tag palette">Jungle Amber</span>
+                </div>
+                <h3 class="gallery-title">Jungle Amber Crown</h3>
+                <p class="gallery-desc">Aztec warrior. Jade green with golden amber geometric patterns. Ancient gold
+                    bands.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #5A7F3C;" title="#5A7F3C"></div>
+                    <div class="color-chip" style="background: #E0A83B;" title="#E0A83B"></div>
+                    <div class="color-chip" style="background: #2E4020;" title="#2E4020"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asymmetric × Nephrite Storm -->
+        <div class="gallery-item" onclick="openLightbox('../renders/asymmetric_nephrite_storm_1768188250658.png')">
+            <img src="../renders/asymmetric_nephrite_storm_1768188250658.png"
+                alt="Asymmetric War Fang × Nephrite Storm">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Asymmetric</span>
+                    <span class="tag palette">Nephrite Storm</span>
+                </div>
+                <h3 class="gallery-title">Nephrite Storm</h3>
+                <p class="gallery-desc">Battle-worn asymmetry. One side full armor, other minimal. Dramatic visual
+                    tension.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #1E3F2B;" title="#1E3F2B"></div>
+                    <div class="color-chip" style="background: #4A6B55;" title="#4A6B55"></div>
+                    <div class="color-chip" style="background: #2C2C2C;" title="#2C2C2C"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ritual Inset × White Jade Bone -->
+        <div class="gallery-item" onclick="openLightbox('../renders/ritual_inset_white_jade_1768188266264.png')">
+            <img src="../renders/ritual_inset_white_jade_1768188266264.png" alt="Ritual Inset × White Jade Bone">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Ritual Inset</span>
+                    <span class="tag palette">White Jade Bone</span>
+                </div>
+                <h3 class="gallery-title">White Jade Bone</h3>
+                <p class="gallery-desc">Ancestral shamanic. White jade with sacred geometry cutouts. Ultra-light
+                    filigree.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #F2F4EE;" title="#F2F4EE"></div>
+                    <div class="color-chip" style="background: #7FAF95;" title="#7FAF95"></div>
+                    <div class="color-chip" style="background: #C9D6CE;" title="#C9D6CE"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ritual Inset × Loa Bone Turquoise -->
+        <div class="gallery-item" onclick="openLightbox('../renders/ritual_inset_loa_turquoise_1768188290443.png')">
+            <img src="../renders/ritual_inset_loa_turquoise_1768188290443.png" alt="Ritual Inset × Loa Bone Turquoise">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Ritual Inset</span>
+                    <span class="tag palette">Loa Turquoise</span>
+                </div>
+                <h3 class="gallery-title">Loa Bone Turquoise</h3>
+                <p class="gallery-desc">Island shaman. Turquoise filigree with ivory bone inlays. Spirit-touched ritual.
+                </p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #2FB7A3;" title="#2FB7A3"></div>
+                    <div class="color-chip" style="background: #E9E2D0;" title="#E9E2D0"></div>
+                    <div class="color-chip" style="background: #1A4F4A;" title="#1A4F4A"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EARTH TONES SECTION -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem 0; margin: 1rem 0;">
+            <h2 style="font-family: 'Cinzel', serif; font-size: 2rem; color: #CD7F32;">🌄 Earth Tones Collection</h2>
+            <p style="color: var(--text-secondary);">Burnt oranges, cobalts, bronzes, and forest depths</p>
+        </div>
+
+        <!-- Tusk-Base × Burnt Sienna -->
+        <div class="gallery-item" onclick="openLightbox('../renders/tusk_base_burnt_sienna_1768189156573.png')">
+            <img src="../renders/tusk_base_burnt_sienna_1768189156573.png" alt="Tusk-Base Cap × Burnt Sienna">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Tusk-Base Cap</span>
+                    <span class="tag palette" style="background: rgba(139, 69, 19, 0.3); color: #CD853F;">Burnt
+                        Sienna</span>
+                </div>
+                <h3 class="gallery-title">Burnt Sienna</h3>
+                <p class="gallery-desc">Desert warrior aesthetic. Sun-baked terracotta clay with warm earth tones.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #8B4513;" title="#8B4513"></div>
+                    <div class="color-chip" style="background: #CD853F;" title="#CD853F"></div>
+                    <div class="color-chip" style="background: #5C3317;" title="#5C3317"></div>
+                    <div class="color-chip" style="background: #D2691E;" title="#D2691E"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tusk-Base × Ancient Bronze -->
+        <div class="gallery-item" onclick="openLightbox('../renders/tusk_base_ancient_bronze_1768189199088.png')">
+            <img src="../renders/tusk_base_ancient_bronze_1768189199088.png" alt="Tusk-Base Cap × Ancient Bronze">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Tusk-Base Cap</span>
+                    <span class="tag palette" style="background: rgba(107, 68, 35, 0.3); color: #CD7F32;">Ancient
+                        Bronze</span>
+                </div>
+                <h3 class="gallery-title">Ancient Bronze</h3>
+                <p class="gallery-desc">Weathered statues. Aged bronze with green patina accents. Greco-Roman warrior.
+                </p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #6B4423;" title="#6B4423"></div>
+                    <div class="color-chip" style="background: #CD7F32;" title="#CD7F32"></div>
+                    <div class="color-chip" style="background: #3D2612;" title="#3D2612"></div>
+                    <div class="color-chip" style="background: #4A7C59;" title="#4A7C59"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tusk-Base × Cedar Smoke -->
+        <div class="gallery-item" onclick="openLightbox('../renders/tusk_base_cedar_smoke_1768189269000.png')">
+            <img src="../renders/tusk_base_cedar_smoke_1768189269000.png" alt="Tusk-Base Cap × Cedar Smoke">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Tusk-Base Cap</span>
+                    <span class="tag palette" style="background: rgba(74, 55, 40, 0.3); color: #A0522D;">Cedar
+                        Smoke</span>
+                </div>
+                <h3 class="gallery-title">Cedar Smoke</h3>
+                <p class="gallery-desc">Forest shaman. Smoked wood grain with sacred ember glow. Absolutely stunning.
+                </p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #4A3728;" title="#4A3728"></div>
+                    <div class="color-chip" style="background: #7A5C47;" title="#7A5C47"></div>
+                    <div class="color-chip" style="background: #2A1F16;" title="#2A1F16"></div>
+                    <div class="color-chip" style="background: #A0522D;" title="#A0522D"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jaw Crown × Deep Cobalt -->
+        <div class="gallery-item" onclick="openLightbox('../renders/jaw_crown_deep_cobalt_1768189170372.png')">
+            <img src="../renders/jaw_crown_deep_cobalt_1768189170372.png" alt="Jaw Crown × Deep Cobalt">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Jaw Crown</span>
+                    <span class="tag palette" style="background: rgba(0, 45, 98, 0.3); color: #4169E1;">Deep
+                        Cobalt</span>
+                </div>
+                <h3 class="gallery-title">Deep Cobalt</h3>
+                <p class="gallery-desc">Ocean depths. Royal navy blue with wave-inspired patterns. Sea warrior crown.
+                </p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #002D62;" title="#002D62"></div>
+                    <div class="color-chip" style="background: #0047AB;" title="#0047AB"></div>
+                    <div class="color-chip" style="background: #001A3A;" title="#001A3A"></div>
+                    <div class="color-chip" style="background: #4169E1;" title="#4169E1"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jaw Crown × Hammered Copper -->
+        <div class="gallery-item" onclick="openLightbox('../renders/jaw_crown_hammered_copper_1768189241107.png')">
+            <img src="../renders/jaw_crown_hammered_copper_1768189241107.png" alt="Jaw Crown × Hammered Copper">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Jaw Crown</span>
+                    <span class="tag palette" style="background: rgba(184, 115, 51, 0.3); color: #DA8A67;">Hammered
+                        Copper</span>
+                </div>
+                <h3 class="gallery-title">Hammered Copper</h3>
+                <p class="gallery-desc">Forge master aesthetic. Hand-hammered texture with warm metallic glow.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #8B4513;" title="#8B4513"></div>
+                    <div class="color-chip" style="background: #B87333;" title="#B87333"></div>
+                    <div class="color-chip" style="background: #4A2409;" title="#4A2409"></div>
+                    <div class="color-chip" style="background: #DA8A67;" title="#DA8A67"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Illusion Fang × Storm Tide -->
+        <div class="gallery-item" onclick="openLightbox('../renders/illusion_fang_storm_tide_1768189184567.png')">
+            <img src="../renders/illusion_fang_storm_tide_1768189184567.png" alt="Illusion Fang × Storm Tide">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Illusion Fang</span>
+                    <span class="tag palette" style="background: rgba(44, 62, 80, 0.3); color: #00BFFF;">Storm
+                        Tide</span>
+                </div>
+                <h3 class="gallery-title">Storm Tide</h3>
+                <p class="gallery-desc">Thunderclouds over sea. Electric blue lightning through storm gray surface.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #2C3E50;" title="#2C3E50"></div>
+                    <div class="color-chip" style="background: #5D6D7E;" title="#5D6D7E"></div>
+                    <div class="color-chip" style="background: #1A252F;" title="#1A252F"></div>
+                    <div class="color-chip" style="background: #00BFFF;" title="#00BFFF"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Illusion Fang × Midnight Sapphire -->
+        <div class="gallery-item"
+            onclick="openLightbox('../renders/illusion_fang_midnight_sapphire_1768189255211.png')">
+            <img src="../renders/illusion_fang_midnight_sapphire_1768189255211.png"
+                alt="Illusion Fang × Midnight Sapphire">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Illusion Fang</span>
+                    <span class="tag palette" style="background: rgba(15, 26, 61, 0.3); color: #4682B4;">Midnight
+                        Sapphire</span>
+                </div>
+                <h3 class="gallery-title">Midnight Sapphire</h3>
+                <p class="gallery-desc">Night sky aesthetic. Precious gem quality with starlight sparkle accents.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #0F1A3D;" title="#0F1A3D"></div>
+                    <div class="color-chip" style="background: #1E3A6D;" title="#1E3A6D"></div>
+                    <div class="color-chip" style="background: #050A15;" title="#050A15"></div>
+                    <div class="color-chip" style="background: #4682B4;" title="#4682B4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ritual Inset × Canyon Rust -->
+        <div class="gallery-item" onclick="openLightbox('../renders/ritual_inset_canyon_rust_1768189223629.png')">
+            <img src="../renders/ritual_inset_canyon_rust_1768189223629.png" alt="Ritual Inset × Canyon Rust">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Ritual Inset</span>
+                    <span class="tag palette" style="background: rgba(139, 58, 58, 0.3); color: #CD5C5C;">Canyon
+                        Rust</span>
+                </div>
+                <h3 class="gallery-title">Canyon Rust</h3>
+                <p class="gallery-desc">Desert shaman. Red rock formations with open filigree. Southwest aesthetic.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #8B3A3A;" title="#8B3A3A"></div>
+                    <div class="color-chip" style="background: #CD5C5C;" title="#CD5C5C"></div>
+                    <div class="color-chip" style="background: #4A1C1C;" title="#4A1C1C"></div>
+                    <div class="color-chip" style="background: #A0522D;" title="#A0522D"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asymmetric × Terracotta Dusk -->
+        <div class="gallery-item" onclick="openLightbox('../renders/asymmetric_terracotta_dusk_1768189295083.png')">
+            <img src="../renders/asymmetric_terracotta_dusk_1768189295083.png" alt="Asymmetric × Terracotta Dusk">
+            <div class="gallery-info">
+                <div class="gallery-tags">
+                    <span class="tag archetype">Asymmetric</span>
+                    <span class="tag palette" style="background: rgba(192, 64, 0, 0.3); color: #E07020;">Terracotta
+                        Dusk</span>
+                </div>
+                <h3 class="gallery-title">Terracotta Dusk</h3>
+                <p class="gallery-desc">Desert gladiator. One side full terracotta cap, other minimal band.
+                    Mediterranean.</p>
+                <div class="color-chips">
+                    <div class="color-chip" style="background: #C04000;" title="#C04000"></div>
+                    <div class="color-chip" style="background: #E07020;" title="#E07020"></div>
+                    <div class="color-chip" style="background: #6B2000;" title="#6B2000"></div>
+                    <div class="color-chip" style="background: #8B4000;" title="#8B4000"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size">
+    </div>
+
+    <footer>
+        <p>0rcGrillz™ Concept Gallery | 21 Rendered Concepts</p>
+        <p style="margin-top: 0.5rem; color: var(--accent-jade);">Generated with AI for design exploration</p>
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Copy hex on click
+        document.querySelectorAll('.color-chip').forEach(chip => {
+            chip.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const hex = chip.title;
+                navigator.clipboard.writeText(hex);
+                chip.style.transform = 'scale(1.3)';
+                setTimeout(() => chip.style.transform = '', 300);
+            });
+        });
+    </script>
+</body>
+
+</html>

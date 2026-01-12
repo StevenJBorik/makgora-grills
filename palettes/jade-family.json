@@ -1,0 +1,42 @@
+{
+    "jade_family": {
+        "imperial_war_jade": {
+            "name": "Imperial War Jade",
+            "look": "Polished royal authority",
+            "base": "#0F5132",
+            "highlight": "#2FA36B",
+            "vein": "#B9E5C9",
+            "metal_accent": "#D4AF37"
+        },
+        "nephrite_storm": {
+            "name": "Nephrite Storm",
+            "look": "Battle-worn jade",
+            "base": "#1E3F2B",
+            "cloud": "#4A6B55",
+            "shadow": "#0B1F15",
+            "metal_accent": "#2C2C2C"
+        },
+        "white_jade_bone": {
+            "name": "White Jade Bone",
+            "look": "Ancestral / shamanic",
+            "base": "#F2F4EE",
+            "vein": "#7FAF95",
+            "shadow": "#C9D6CE",
+            "metal_accent": "#8A8A8A"
+        },
+        "blood_jade": {
+            "name": "Blood Jade",
+            "look": "Rage, sacrifice",
+            "base": "#153D2E",
+            "vein": "#7B1E1E",
+            "highlight": "#3F7A5A"
+        },
+        "void_jade": {
+            "name": "Void Jade",
+            "look": "Corrupted magic",
+            "uv_reactive": true,
+            "base": "#050B09",
+            "glow_vein": "#1FFF8B"
+        }
+    }
+}

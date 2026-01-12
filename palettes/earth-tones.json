@@ -1,0 +1,130 @@
+{
+    "earth_tones": {
+        "burnt_sienna": {
+            "name": "Burnt Sienna",
+            "look": "Desert warrior, sun-baked clay",
+            "base": "#8B4513",
+            "highlight": "#CD853F",
+            "shadow": "#5C3317",
+            "accent": "#D2691E"
+        },
+        "terracotta_dusk": {
+            "name": "Terracotta Dusk",
+            "look": "Ancient pottery, earthy warmth",
+            "base": "#C04000",
+            "highlight": "#E07020",
+            "shadow": "#6B2000",
+            "accent": "#8B4000"
+        },
+        "canyon_rust": {
+            "name": "Canyon Rust",
+            "look": "Red rock desert, oxidized iron",
+            "base": "#8B3A3A",
+            "highlight": "#CD5C5C",
+            "shadow": "#4A1C1C",
+            "vein": "#A0522D"
+        },
+        "autumn_ember": {
+            "name": "Autumn Ember",
+            "look": "Falling leaves, smoldering fire",
+            "base": "#B8450D",
+            "highlight": "#FF6B35",
+            "shadow": "#6B2907",
+            "accent": "#D4A574"
+        },
+        "mahogany_smoke": {
+            "name": "Mahogany Smoke",
+            "look": "Dark wood, leather, campfire",
+            "base": "#3E1C0D",
+            "highlight": "#6B3A1F",
+            "shadow": "#1A0A05",
+            "vein": "#8B5A2B"
+        }
+    },
+    "ocean_cobalt": {
+        "deep_cobalt": {
+            "name": "Deep Cobalt",
+            "look": "Ocean depths, royal navy",
+            "base": "#002D62",
+            "highlight": "#0047AB",
+            "shadow": "#001A3A",
+            "accent": "#4169E1"
+        },
+        "midnight_sapphire": {
+            "name": "Midnight Sapphire",
+            "look": "Night sky, precious gems",
+            "base": "#0F1A3D",
+            "highlight": "#1E3A6D",
+            "shadow": "#050A15",
+            "glow": "#4682B4"
+        },
+        "storm_tide": {
+            "name": "Storm Tide",
+            "look": "Thunderclouds over sea",
+            "base": "#2C3E50",
+            "highlight": "#5D6D7E",
+            "shadow": "#1A252F",
+            "electric": "#00BFFF"
+        },
+        "frost_cobalt": {
+            "name": "Frost Cobalt",
+            "look": "Frozen depths, icy steel",
+            "base": "#1C3F5F",
+            "highlight": "#4A7C9B",
+            "shadow": "#0D1F2F",
+            "frost": "#B0E0E6"
+        }
+    },
+    "bronze_copper": {
+        "ancient_bronze": {
+            "name": "Ancient Bronze",
+            "look": "Weathered statues, patina",
+            "base": "#6B4423",
+            "highlight": "#CD7F32",
+            "shadow": "#3D2612",
+            "patina": "#4A7C59"
+        },
+        "hammered_copper": {
+            "name": "Hammered Copper",
+            "look": "Forged metal, warm glow",
+            "base": "#8B4513",
+            "highlight": "#B87333",
+            "shadow": "#4A2409",
+            "shine": "#DA8A67"
+        },
+        "oxidized_brass": {
+            "name": "Oxidized Brass",
+            "look": "Aged instruments, vintage",
+            "base": "#6B5B3D",
+            "highlight": "#B5A642",
+            "shadow": "#3D3422",
+            "verdigris": "#4F7942"
+        }
+    },
+    "forest_depths": {
+        "mossy_oak": {
+            "name": "Mossy Oak",
+            "look": "Ancient forest floor",
+            "base": "#3D5229",
+            "highlight": "#6B8E23",
+            "shadow": "#1E2914",
+            "moss": "#556B2F"
+        },
+        "cedar_smoke": {
+            "name": "Cedar Smoke",
+            "look": "Smoked wood, sacred fire",
+            "base": "#4A3728",
+            "highlight": "#7A5C47",
+            "shadow": "#2A1F16",
+            "ember": "#A0522D"
+        },
+        "twilight_pine": {
+            "name": "Twilight Pine",
+            "look": "Forest at dusk",
+            "base": "#1E3B2E",
+            "highlight": "#3D6B4F",
+            "shadow": "#0F1D17",
+            "mist": "#708090"
+        }
+    }
+}
